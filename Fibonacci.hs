@@ -1,3 +1,5 @@
+import Data.Function ((&))
+
 fib n = snd $ go n
   where
     -- go :: Int -> (Int,Int)
@@ -13,3 +15,12 @@ fib' n = go n (0,1)
     go 0 (a,b) = a
     go 1 (a,b) = b
     go x (a,b) = go (x-1) (b,a+b)
+
+main = do
+  putStrLn $ show $ map fib [0..7]
+  putStrLn $ show $ map fib' [0..7]
+
+main' =
+  [fib,fib']
+  & map (\f -> map f [0..7])
+  & mapM_ (\l -> l & show & putStrLn)
