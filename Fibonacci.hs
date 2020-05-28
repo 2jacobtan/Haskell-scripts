@@ -1,5 +1,6 @@
 import Data.Function ((&))
 
+-- top-down
 fib n = snd $ go n
   where
     -- go :: Int -> (Int,Int)
@@ -9,6 +10,7 @@ fib n = snd $ go n
       where
         (a,b) = go (x - 1)
 
+-- bottom-up
 -- tail recursive
 fib' n = go n (0,1)
   where
