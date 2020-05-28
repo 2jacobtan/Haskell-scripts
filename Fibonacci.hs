@@ -1,4 +1,5 @@
 import Data.Function ((&))
+import Data.List (foldl')
 
 -- top-down
 fib n = snd $ go n
@@ -18,11 +19,18 @@ fib' n = go n (0,1)
     go 1 (_,b) = b
     go x (a,b) = go (x-1) (b,a+b)
 
-main = do
+-- tail recursive strict left-fold
+fib'' 0 = 0
+fib'' 1 = 1
+fib'' n = snd $ foldl' (\(a,b) _ -> (b,a+b)) (0,1) [2..n]
+
+main0 = do
   putStrLn $ show $ map fib [0..7]
   putStrLn $ show $ map fib' [0..7]
 
-main' =
-  [fib,fib']
+main1 =
+  [fib,fib',fib'']
   & map (\f -> map f [0..7])
   & mapM_ (\l -> l & show & putStrLn)
+
+main = main1
