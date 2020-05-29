@@ -23,13 +23,15 @@ fib' n = go n (0,1)
 fib'' 0 = 0
 fib'' 1 = 1
 fib'' n = snd $ foldl' (\(a,b) _ -> (b,a+b)) (0,1) [2..n]
+-- in one line
+fib''' n = fst $ foldl' (\(a,b) _ -> (b,a+b)) (0,1) [1..n]
 
 main0 = do
   putStrLn $ show $ map fib [0..7]
   putStrLn $ show $ map fib' [0..7]
 
 main1 =
-  [fib,fib',fib'']
+  [fib,fib',fib'',fib''']
   & map (\f -> map f [0..7])
   & mapM_ (\l -> l & show & putStrLn)
 
