@@ -1,4 +1,4 @@
-import Data.Function ((&))
+import Data.Function ( (&), fix )
 import Data.List (foldl')
 
 -- top-down
@@ -26,12 +26,16 @@ fib'' n = snd $ foldl' (\(a,b) _ -> (b,a+b)) (0,1) [2..n]
 -- in one line
 fib''' n = fst $ foldl' (\(a,b) _ -> (b,a+b)) (0,1) [1..n]
 
+-- from https://www.reddit.com/r/haskell/comments/gsascr/tail_recursion_explained_computerphile/fs5yqhe/
+fibs = fix $ (0:) . scanl (+) 1
+fib4 = (fibs !!)
+
 main0 = do
   putStrLn $ show $ map fib [0..7]
   putStrLn $ show $ map fib' [0..7]
 
 main1 =
-  [fib,fib',fib'',fib''']
+  [fib,fib',fib'',fib''',fib4]
   & map (\f -> map f [0..7])
   & mapM_ (\l -> l & show & putStrLn)
 
