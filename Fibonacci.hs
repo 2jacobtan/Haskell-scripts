@@ -13,6 +13,7 @@ fib n = snd $ go n
 
 -- bottom-up
 -- tail recursive
+-- from https://www.youtube.com/watch?v=_JtPhF8MshA&t=13m12s
 fib' n = go n (0,1)
   where
     go 0 (a,_) = a
